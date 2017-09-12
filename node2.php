@@ -89,10 +89,6 @@ function checkrecaptcha($recaptcha_response, $privatekey) {
 
 function regist($kiji){
 
-    if(proxy_connect('9441') != 1){
-      error("ＥＲＲＯＲ！　PORT(9441) NOT OPEN / CHECK UMRCOIN UPNP ON");
-    }
-
 	if(isset($_POST["g-recaptcha-response"])){
 		$recaptcha = $_POST["g-recaptcha-response"];
 	} else { $recaptcha = ""; }
@@ -107,6 +103,9 @@ function regist($kiji){
 
 	if(checkrecaptcha("$recaptcha", "$privatekey")){
 
+    if(proxy_connect('9441') != 1){
+      error("ＥＲＲＯＲ！　PORT(9441) NOT OPEN / CHECK UMRCOIN UPNP ON");
+    }
 
   $bitcoin = new Bitcoin('user','password','127.0.0.1','9442');//umrcoind rpc
   $validateaddr = 0;
